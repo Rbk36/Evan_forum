@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+// import auth middleware
+const authMiddleware = require("../middleware/authMiddleware");
 // importing controller functions
 const { register, login, checkUser } = require("../controller/userController");
 
@@ -10,5 +12,5 @@ router.post("/register", register);
 router.post("/login", login);
 
 // check user route
-router.get("/check", checkUser);
+router.get("/check", authMiddleware, checkUser);
 module.exports = router;
