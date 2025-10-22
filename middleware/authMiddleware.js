@@ -9,10 +9,8 @@ const authMidddleware = (req, res, next) => {
   }
   try {
     // const token = authHeader.split(" ")[1];
-    const data = jwt.verify(authHeader, "secret");
-    return res.status(StatusCodes.OK).json({ data });
-    // req.user = { userId: data.userId, name: data.name };
-    // next();
+    const { username, userid } = jwt.verify(authHeader, "secret");
+    next();
   } catch (error) {
     return res
       .status(StatusCodes.UNAUTHORIZED)
